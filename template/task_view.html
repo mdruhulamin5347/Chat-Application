@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %} Task View Page  {% endblock %}
+
+{% block head %}
+<style>
+    .clicked {
+        background-color: green; /* Change to the desired color */
+        color: white; /* Change to the desired text color */
+        cursor: not-allowed;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container my-5">
+    <div>
+        {% if not obj %}
+            <h3 class="text-center my-5">Your task is not available. Please add your today task.</h3>
+        {% else %}
+            <h3 class="text-center mt-4 mb-2">To-Do List</h3>
+        <a href="{% url 'work_input' user.username %}" class="btn btn-sm btn-primary mx-1">Add Task</a>
+        <a href="/success/{{user.username}}/" class="btn btn-sm btn-primary mx-1">Your Success</a> 
+    </div>
+    
+    
+    
+    
+<div class="table-responsive">
+    <table class="table my-4 table-bordered table-hover table-light">
+        <thead class="text-center">
+            <tr class="table-primary">
+                <th scope="col">Serial Number</th>
+                <th scope="col">Work Time</th>
+                <th scope="col">Work Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for item in obj %}
+            <tr>
+                <td class="col-1">{{ forloop.counter }}</td>
+                <td class="col-2">{{ item.work_time }}</td>
+                <td class="col-5">{{ item.work_name }}</td>
+                <td class="col-4">
+                    <div class="btn-group" role="group">
+                        <form method="POST" action="/mark_as_done/{{ item.id }}/{{user.username}}/">
+                            {% csrf_token %}
+                            <div class="mx-1 d-inline-block">
+                                <input class="form-check-input mt-2 border border-dark-subtle" type="checkbox" id="checkbox" aria-label="Checkbox for following text input" name="Done" {% if item.done_bol %}checked{% endif %}>
+                                <button type="submit" class="btn btn-primary mt-lg-0 mt-sm-1 mt-xs-1">Done</button>
+                            </div>
+                            
+                        </form>
+                        <a href="/update/{{ item.id }}/{{user.username}}/" class="btn btn-sm btn-info mx-1">Update</a>
+                        <a href="/delete/{{ item.id }}/{{user.username}}/" class="btn btn-sm btn-danger mx-1">Delete</a> 
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    
+    {% endif %}
+
+    <script>
+        function handleDoneClick(button) {
+            // Check if the button is not already marked as clicked
+            if (!button.classList.contains("clicked")) {
+                // Add your logic for what happens on a single click here
+    
+                // Change the class to mark the button as clicked
+                button.classList.add("clicked");
+    
+                // Optionally, you can disable the button to prevent further clicks
+                button.disabled = true;
+            }
+        }
+    </script>
+{% endblock %}

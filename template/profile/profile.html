@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} Profile View  {% endblock %}
+{% block body %}
+
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-6">
+      <div class="card">
+        <div class="card-body">
+<div class="container">
+  <div class="row">
+    <h5 class="card-title text-center">Profile View</h5><br><br>
+    <div class="col">
+      <h1 class="pb-4" ><img style="border:2px solid aqua" class="w-50 rounded rounded-circle" src="{{user.image.url}}" /></h1>
+    </div>
+    <div class="col">
+      <div class="pt-5">
+        {% if user %}
+                Name: {{ user.user.username }} <br>
+            {% if user.address %}
+                <!-- <h1>{{ user.Profile_update.image }}gdhh</h1> -->
+                Address: {{ user.address }} <br>
+            {% else %}
+                No profile update found.
+              {% endif %}
+        {% else %}
+              No user found.
+        {% endif %}
+                    <br>
+                <button class="btn btn-primary"><a style="color: white; text-decoration:none;" href="{% url 'profile_update' %}">Update Profile</a></button>
+            </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+            
+            
+
+        
+            
+            
+
+  
+
+{% endblock body%}

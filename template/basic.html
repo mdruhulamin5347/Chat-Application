@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+{% load static %}
+{% load notifications_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Montserrat:ital,wght@1,100&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="/media/design/favicon.ico" type="image/x-icon">
+    <title>{% block title %}  {% endblock title %}</title>
+    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+    <script src="{% static 'notifications/live_notify.js' %}" type="text/javascript"></script>
+
+    <style>
+      html{
+        scroll-behavior: smooth;
+    }
+    h2,h3,h4,h5,h6{
+        font-family: 'Akshar', sans-serif;
+    
+    
+    }
+    header{
+        background-image: url("/media/design/bgg.webp");
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size: cover;
+    }
+    
+    .banner-container{
+        height: 100vh;
+    
+    }
+    
+    nav{
+        background-color: rgba(0,0,0,0.4);
+    
+    }
+    .navbar-brand img{
+        width: 50px;
+        height: auto;
+        margin-left: 5px;
+    }
+    .nav-item{
+        padding: 1px 10px;
+    }
+    .nav-link{
+        color: white;
+    }
+    .nav-link:hover{
+        color: wheat;
+    
+    }
+    .banner-content h1{
+        background-color: rgba(7, 101, 189, 0.8);
+        font-size: 3.5rem;
+        border-radius: 5px;
+    }
+    .banner-content .btn{
+        margin-right: 10px;
+    
+    }
+    .banner-content .btn i{
+        margin-right: 8px;
+        
+    }
+    
+    
+    
+    #feacher{
+        padding: 5px 10px;
+        background-color: #e8ded2;
+    }
+    .card{
+        border:1px solid #ff02c0;
+        margin: 15px 0px;
+        transition: 0.4s;
+      
+    }
+    .card-body{
+        background-color: #e8ded2;
+    
+    }
+    .card:hover{
+        transform: scale(1.05);
+        box-shadow: 2px 6px 5px;
+    
+    }
+
+      /* Custom styles for the footer */
+      .footer {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        text-align: center;
+      }
+ 
+    
+    </style>
+
+    {% block head %}
+
+
+    {% endblock %}
+
+</head>
+<body>
+
+   
+
+        <!--header content              header-content-->
+
+        <header>
+
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                  
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">
+                        <img src="data:image/png;base64,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" alt="logo">
+                  </a>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Terget
+                        </a>
+                        <ul class="dropdown-menu">
+                          {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{% url 'work_input' user.username %}">Task Add</a></li>
+                            <li><a class="dropdown-item" href="{% url 'task_view' user.username %}">Task View</a></li>
+                    
+                          {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Task Add</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Task View</a></li>
+                    
+                          {% endif %}
+                          
+                          
+                          
+
+
+                        </ul>
+                      </li>
+                      {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_chat_list' %}">Chats</a>
+                      </li>
+                      <li class="nav-item">
+                        {% notifications_unread as unread_count %}
+                        {% if unread_count %}
+                            {% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge, my_special_notification_callback' %}
+                            <a class="nav-link active" aria-current="page" href="{% url 'notification' %}">
+                                {% live_notify_badge %} Notifications
+                            </a>
+                        {% endif %}
+                      </li>
+                      {% else %}
+                      <a class="nav-link" href="{% url 'login' %}">Chats</a>
+                    
+                      {% endif %}
+
+
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                      </li>                     
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                      </li>
+                      
+                    </ul>
+                    <!-- <form class="d-flex" role="search"> -->
+                      <ul>
+                      {% if user.is_authenticated %}
+                      <li class="nav-item dropdown" style="list-style: none;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {% if user.profile_update.image %}
+                          <img style="height: 40px; width: 40px; border:1px solid aqua" class="rounded rounded-circle" src="{{ user.profile_update.image.url }}" />
+                      {% else %}
+                          <img style="height: 40px; width: 40px; border:1px solid aqua" class="rounded rounded-circle" src="../media/profile/default.png" />
+                      {% endif %}
+                        </a>
+                        <ul class="dropdown-menu">
+
+                          <li><a class="dropdown-item" href="{% url 'profile_view' %}">Profile</a></li>
+                          <li><a class="dropdown-item" href="{% url 'user_chat_list' %}">Chats</a></li>
+
+                          
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/auth/logout/">Logout</a></li>
+                          
+                        
+                        </ul>
+                      </li>
+        
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/auth/login/">Login</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                    <!-- </form> -->
+                    <div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+
+              <section id="banner">
+                <div class="banner-container d-flex justify-content-center align-items-center">
+                    <div class="banner-content text-center text-white">
+                        <h1 class="font-weight-bloder text-white mb-5 p-3">Learn something new!!!</h1>
+                        <button class="btn btn-lg btn-primary mr-3"><i class="fas fa-play "></i>Tutorial</button>
+                        <button class="btn btn-lg btn-primary mr-3"><i class="fab fa-youtube"></i>Subscribe</button>
+            
+                    </div>
+                </div>
+            </section> 
+       </header>
+       
+
+        <!-- main content                main content -->
+
+
+        <main>
+
+          {% block body %}
+
+          {% endblock %}
+
+        </main>
+            
+        <!--footer content                   footer-content -->
+
+
+    
+      <div class="container mt-5">
+
+      </div>
+      
+      <footer class="footer">
+        <div class="container">
+          
+          
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item"><a href="{% url 'user_chat_list' %}">Chats</a></li>
+            <li class="list-inline-item"><a href="{% url 'about' %}">About</a></li>
+            <li class="list-inline-item"><a href="{% url 'contact' %}">Contact</a></li>
+          </ul>
+          <div class="container">
+            <a href="https://www.facebook.com/Ruhulaminarafat82?mibextid=kFxxJD" target="_blank">
+              <i class="fab fa-facebook"></i> Visit Facebook
+            </a>
+
+            <p class="mt-3 mb-0">&copy; 2024 Create By Jackfruit Team. All rights reserved.</p>
+          <p>Designed with <i class="bi bi-heart-fill text-danger"> Django</i> </p>
+          </div>
+        </div>
+      </footer>
+        
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

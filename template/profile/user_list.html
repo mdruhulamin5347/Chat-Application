@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% block title %} Chat List Page {% endblock %}
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Chats</h5>
+                        <ul class="list-group mt-3">
+                            {% for item in user_chat_list %}
+                            <li class="list-group-item">
+                                <div class="row">
+
+                                    <div class="col-lg-1 container d-flex justify-content-center align-items-center">
+                                        <img style="height: 30px; width: 30px; border:1px solid aqua" class="rounded rounded-circle" src="../../media/profile/default.png" />
+                                    </div>
+                                    <div class="col-11">
+                                        <a style="font-size: 20px;" href="{% url 'send_message' item.user.id %}" class="text-decoration-none">{{ item.user.username }}</a>
+                                        {% if item.latest_message %}
+                                            <p style="font-size: 12px; display:inline;" class="text-end text-muted ms-2">{{ item.latest_message.timestamp }}</p>
+                                        <div class="mt-1">
+                                            
+                                            <p style="font-size: 15px;" class="mb-0 text-muted">{{ item.latest_message.content }}</p>
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            
+                                            <p class="text-muted">No messages</p>
+                                        </div>
+                                    
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                               
+                                
+                               
+                            </li>
+                            {% endfor %}
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

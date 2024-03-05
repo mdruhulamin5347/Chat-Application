@@ -1,0 +1,47 @@
+{% extends 'basic.html' %}
+
+{% block title %} Home Page  {% endblock %}
+
+{% block head %}
+<style>
+
+  .card:hover{
+    transform: none;
+  
+  }
+</style>
+
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="header"><h4 style="text-align: center; margin-top:60px; font-size:40px; color:#0B5ED7;font-weight: bold;">Contact Us</h4></div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Contact</h5>
+                  
+                <form method="POST" action="">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {{form | crispy }}
+                    
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        </div>        
+
+
+
+{% endblock %}
