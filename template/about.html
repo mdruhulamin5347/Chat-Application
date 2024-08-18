@@ -1,167 +1,68 @@
-{% extends 'basic.html' %}
+{% extends 'base.html' %}
 
-{% block title %} Home Page  {% endblock %}
+{% block title %} Home Page {% endblock %}
 
 {% block body %}
-
-
-
-          
-
 <div class="container my-5">
-<div class="bg-light pt-5">
-    <div class="row pb-2">
-        <div class="col-sm-4 justify-content-center pt-3">
-            <h3 class="text-center ">About Ruhul Amin</h3>
-            <img style="height:200px;" class="rounded-circle img-fluid img-thumbnail d-block m-auto" src="/media/COLLEGE3.jpg" alt="about ruhul">
-        </div>
-        <div class="col-sm-8 mt-5">
-
-
-            
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, modi!</p>
-                <p class="d-inline-flex gap-1">
-                    <a class="text-info" data-bs-toggle="collapse" href="#demo">Learn more...</a>                            
+    {% for i in obj %}
+    <div class="bg-light p-4 rounded mb-2">
+        <div class="row align-items-center">
+            <div class="col-sm-4 text-center mb-4 mb-sm-0">
+                <h3 class="mb-3">About {{ i.name }}</h3>
+                <img class="rounded-circle img-fluid img-thumbnail shadow" style="height: 200px; width: 200px;" src="{{ i.image.url }}" alt="about ruhul">
+            </div>
+            <div class="col-sm-8">
+                <p class="mb-3">{{ i.title }}</p>
+                <p>
+                    <a class="text-primary" data-bs-toggle="collapse" href="#demo{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="demo{{ forloop.counter }}">
+                        Learn more...
+                    </a>
                 </p>
-                <div class="collapse" id="demo">                            
-                  Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, voluptates? Sunt soluta at, corporis ea deserunt corrupti delectus minus ducimus commodi, adipisci quod rem quae ullam quas accusamus iste officiis?
+                <div class="collapse" id="demo{{ forloop.counter }}">
+                    <p>{{ i.details }}</p>
                 </div>
-              
-            
-            <button class="btn btn-outline-info d-block my-2"><a class="text-decoration-none" href="https://www.facebook.com/Ruhulaminarafat82?mibextid=kFxxJD" target="_blank">
-                <i class="fab fa-facebook"></i> Visit Facebook </a>
-            </button>
-        </div>
-    </div>
-
-</div>
-<!-- dynamic tab section -->
-<div class="nav bg-light">
-    <ul class="nav nav-tabs bg-info">
-        <li class="nav-item d-block"><a class="nav-link active" data-bs-toggle="tab" href="#edu">Educations</a></li>
-        <li class="nav-item d-block"><a class="nav-link" data-bs-toggle="tab" href="#skill">Skill</a></li>
-        <li class="nav-item d-block"><a class="nav-link" data-bs-toggle="tab" href="#hobby">Hobby</a></li>
-    </ul>
-    <div class="tab-content d-inline-block">
-        <div class="tab-pane active" id="edu">
-            <p>1.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            <p>1.Diploma in engineering</p>
-        </div>
-        <div class="tab-pane fade" id="skill">
-            <p>2.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            <p>1. HTML,  2. CSS,   3. Python,  4. Mysql,   5. Django,   6. Django Rest Framework,   7. Github</p>
-        </div>
-        <div class="tab-pane fade" id="hobby">
-            <p>3.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            <p>1. Criket, 2. Badminton, 3.Football</p>
-        </div>
-    </div>
-</div>
-
-</div>
-
-
-<div class="container my-5">
-    <div class="bg-light pt-5">
-        <div class="row pb-2">
-            <div class="col-sm-4 justify-content-center pt-3">
-                <h3 class="text-center ">About Muhammad Billal</h3>
-                <img style="height:200px;" class="rounded-circle img-fluid img-thumbnail d-block m-auto" src="/media/5828.jpg" alt="about ruhul">
-            </div>
-            <div class="col-sm-8 mt-5">
-    
-    
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, modi!</p>
-                    <p class="d-inline-flex gap-1">
-                        <a class="text-info" data-bs-toggle="collapse" href="#demo">Learn more...</a>                            
-                    </p>
-                    <div class="collapse" id="demo">                            
-                      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, voluptates? Sunt soluta at, corporis ea deserunt corrupti delectus minus ducimus commodi, adipisci quod rem quae ullam quas accusamus iste officiis?
-                    </div>
-                  
-                
-                    
-                    <button class="btn btn-outline-info d-block my-2"><a class="text-decoration-none" href="https://www.facebook.com/ahmedbabu019" target="_blank">
-                        <i class="fab fa-facebook"></i> Visit Facebook </a>
-                    </button>
-            </div>
-        </div>
-    
-    </div>
-    <!-- dynamic tab section -->
-    <div class="nav bg-light">
-        <ul class="nav nav-tabs bg-info">
-            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#edu2">Educations</a></li>
-            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#skill2">Skill</a></li>
-            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#hobby2">Hobby</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="edu2">
-                <p>1.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            </div>
-            <div class="tab-pane fade" id="skill2">
-                <p>2.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            </div>
-            <div class="tab-pane fade" id="hobby2">
-                <p>3.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
-            </div>
-        </div>
-    </div>
-    
-    </div>
-
-
-
-    <div class="container my-5">
-        <div class="bg-light pt-5">
-            <div class="row pb-2">
-                <div class="col-sm-4 justify-content-center pt-3">
-                    <h3 class="text-center ">About Jayed</h3>
-                    <img style="height:200px;" class="rounded-circle img-fluid img-thumbnail d-block m-auto" src="/media/IMG_20220531_165527.jpg" alt="about ruhul">
-                </div>
-                <div class="col-sm-8 mt-5">
-        
-        
-                    
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, modi!</p>
-                        <p class="d-inline-flex gap-1">
-                            <a class="text-info" data-bs-toggle="collapse" href="#demo">Learn more...</a>                            
-                        </p>
-                        <div class="collapse" id="demo">                            
-                          Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, voluptates? Sunt soluta at, corporis ea deserunt corrupti delectus minus ducimus commodi, adipisci quod rem quae ullam quas accusamus iste officiis?
-                        </div>
-                      
-                    
-                        
-                        <button class="btn btn-outline-info d-block my-2"><a class="text-decoration-none" href="https://www.facebook.com/profile.php?id=100015216641247&mibextid=kFxxJD" target="_blank">
-                            <i class="fab fa-facebook"></i> Visit Facebook </a>
-                        </button>
+                <div class="d-flex justify-content-start gap-2 mt-3">
+                    <a class="btn btn-outline-primary d-inline-flex align-items-center" href="https://www.facebook.com/Ruhulaminarafat82?mibextid=kFxxJD" target="_blank">
+                        <i class="fab fa-facebook me-2"></i> Visit Facebook
+                    </a>
+                    <a class="btn btn-outline-primary d-inline-flex align-items-center" href="/media/resume/Md Ruhul Amin (Django Developer).pdf" download>
+                        <i class="fas fa-download me-2"></i> Download CV
+                    </a>
                 </div>
             </div>
-        
         </div>
-        <!-- dynamic tab section -->
-        <div class="nav bg-light">
-            <ul class="nav nav-tabs bg-info">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#edu3">Educations</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#skill3">Skill</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#hobby3">Hobby</a></li>
+    </div>
+
+    <!-- Dynamic tab section -->
+    <div class="card shadow-sm mb-4" style="border: 0;">
+        <div class="card-header bg-primary">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#edu{{ forloop.counter }}">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#skill{{ forloop.counter }}">Skill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#hobby{{ forloop.counter }}">Hobby</a>
+                </li>
             </ul>
+        </div>
+        <div class="card-body bg-light">
             <div class="tab-content">
-                <div class="tab-pane active" id="edu3">
-                    <p>1.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
+                <div class="tab-pane active" id="edu{{ forloop.counter }}">
+                    <p>{{ i.education }}</p>
                 </div>
-                <div class="tab-pane fade" id="skill3">
-                    <p>2.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
+                <div class="tab-pane fade" id="skill{{ forloop.counter }}">
+                    <p>{{ i.skill }}</p>
                 </div>
-                <div class="tab-pane fade" id="hobby3">
-                    <p>3.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore obcaecati excepturi rerum reprehenderit omnis modi maiores! Maxime voluptates quis id debitis dolores! Aut ad reiciendis, totam deserunt tempore quaerat aperiam, facere sequi inventore ea odit? Sapiente, omnis! Expedita perferendis quibusdam fugiat quas accusamus voluptas officiis id ut. Natus, nulla libero?</p>
+                <div class="tab-pane fade" id="hobby{{ forloop.counter }}">
+                    <p>{{ i.hobby }}</p>
                 </div>
             </div>
         </div>
-        
-        </div>
-
-
+    </div>
+    <hr>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -28,17 +28,17 @@
 <table class="table my-4 table-bordered table-hover table-light">
     <thead class="table-primary text-center">
         <tr>
-            <th>Your Total Task</th>
-            <th>Your Done Task</th>
-            <th>Tody Your Percentage Score</th>
+            <th>Total Task</th>
+            <th>Finished Task</th>
+            <th>Percentage Score</th>
   
         </tr>
     </thead>
     <tbody class="text-center">
 
-            <td><strong>Total Done Count:</strong> {{ total_done_count }}</td>
-            <td><strong>Total objects:</strong> {{ total_objects }}</td>
-            <td><strong>Success percentage_score</strong> {{ percentage_score }}%</td>
+            <td><strong>{{ total_objects }}</strong> </td>
+            <td><strong>{{ total_done_count }}</strong> </td>
+            <td><strong>{{ percentage_score|floatformat:2 }}%</strong> </td>
             <!-- Remove the Total Percentage Score row -->
         </tr>
     </tbody>
@@ -46,9 +46,9 @@
 
 <div class="my-5">
     {% if percentage_score >= 60 %}
-    <h4 class="text-center">Congratulations & You passed | Score: {{ percentage_score }}%</h4>
+    <h4 class="text-center">Congratulations & You passed | Score: {{ percentage_score|floatformat:2 }}%</h4>
 {% else %}
-    <h4 class="text-center">Unfortunately & You Failed | Score: {{ percentage_score }}%</h4>
+    <h4 class="text-center">Unfortunately & You Failed | Score: {{ percentage_score|floatformat:2 }}%</h4>
 {% endif %}
 </div>
 

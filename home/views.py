@@ -83,16 +83,29 @@ def Delete(request,id,username):
 
 
 
-def mark_as_done(request, id, username):
-    user = User.objects.get(username=username)
-    obj = get_object_or_404(To_do_list, id=id, username=user)
+# def mark_as_done(request, id, username):
+#     user = User.objects.get(username=username)
+#     obj = get_object_or_404(To_do_list, id=id, username=user)
 
+#     if request.method == 'POST':
+#         done_bol = 'Done' in request.POST
+#         obj.done_bol = done_bol
+#         obj.save()
+
+#     return redirect('task_view', username=user.username)
+
+    
+
+
+def mark_as_done(request, id):
+    user = request.user
     if request.method == 'POST':
-        done_bol = 'Done' in request.POST
-        obj.done_bol = done_bol
-        obj.save()
-
-    return redirect('task_view', username=user.username)
+        task = get_object_or_404(To_do_list, id=id)
+        # Toggle the done_bol status
+        task.done_bol = not task.done_bol
+        task.save()
+        return redirect('task_view', user)
+    return redirect('task_view', user)
 
 
 

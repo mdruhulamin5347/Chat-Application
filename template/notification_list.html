@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-2">Notifications</h1>
+        <ul class="list-group">
+            {% for notification in notifications %}
+               
+                <li class="list-group-item {{ notification.is_read|yesno:"bg-light, bg-secondary text-white," }}">
+                   
+                    {{ notification.message|safe }}
+
+                    <span class="float-end">{{ notification.timestamp|date:"M d, Y H:i" }}</span>
+                </li>
+                
+                
+            {% empty %}
+                <li class="list-group-item">No notifications</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock body %}

@@ -7,20 +7,20 @@
         <div class="col-lg-8 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Add Your Work</h5>
+                    <h5 class="card-title text-center">Add Your Task</h5>
                     <div class="container">
                         <form method="POST">
                             {% csrf_token %}
                             <div class="mb-3">
-                                <label for="work_time" class="form-label">Work Time:</label>
+                                <label for="work_time" class="form-label">Task Time:</label>
                                 <input type="time" class="form-control" id="work_time" name="work_time">
                             </div>
                 
                             <div class="mb-3">
-                                <label for="work_name" class="form-label">Work Name:</label>
+                                <label for="work_name" class="form-label">Task Name:</label>
                                 <input type="text" class="form-control" id="work_name" name="work_name">
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Work</button>
+                            <button type="submit" class="btn btn-primary">Add Task</button>
                             
                         </form>
                     </div>

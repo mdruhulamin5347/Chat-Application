@@ -1,45 +1,68 @@
-
 {% extends 'base.html' %}
 {% block title %} Chat List Page {% endblock %}
+{% block head %}
+<style>
+    @media screen and (max-width: 576px) {
+        .content-time-image a {
+            font-size: 16px !important;
+        }
+        .content-time-image p {
+            font-size: 10px;
+        }
+        .content-time-image .message-content p {
+            font-size: 12px !important;
+        }
+    }
+</style>
+{% endblock head %}
 {% block body %}
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-6">
+        <div class="col-lg-8 col-md-10">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Chats</h5>
-                        <ul class="list-group mt-3">
-                            {% for item in user_chat_list %}
-                            <li class="list-group-item">
-                                <div class="row">
-
-                                    <div class="col-lg-1 container d-flex justify-content-center align-items-center">
-                                        <img style="height: 30px; width: 30px; border:1px solid aqua" class="rounded rounded-circle" src="../../media/profile/default.png" />
-                                    </div>
-                                    <div class="col-11">
-                                        <a style="font-size: 20px;" href="{% url 'send_message' item.user.id %}" class="text-decoration-none">{{ item.user.username }}</a>
-                                        {% if item.latest_message %}
-                                            <p style="font-size: 12px; display:inline;" class="text-end text-muted ms-2">{{ item.latest_message.timestamp }}</p>
-                                        <div class="mt-1">
-                                            
-                                            <p style="font-size: 15px;" class="mb-0 text-muted">{{ item.latest_message.content }}</p>
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            
-                                            <p class="text-muted">No messages</p>
-                                        </div>
-                                    
-                                        {% endif %}
-                                    </div>
-
+                    <ul class="list-group mt-3">
+                        {% for item in user_chat_list %}
+                        <li class="list-group-item {% if not item.latest_message.is_read and item.latest_message.sender != request.user %} bg-light {% endif %}">
+                            <div class="row">
+                                <div class="col-1 container d-flex justify-content-center align-items-center">
+                                    {% if item.profile and item.profile.image %}
+                                    <img style="height: 30px; width: 30px; border:1px solid aqua" class="rounded rounded-circle" src="{{ item.profile.image.url }}" alt="{{ item.user.username }}" />
+                                    {% else %}
+                                    <img style="height: 30px; width: 30px; border:1px solid aqua" class="rounded rounded-circle" src="/media/profile/default.png" alt="Default Image" />
+                                    {% endif %}
                                 </div>
-                               
-                                
-                               
-                            </li>
-                            {% endfor %}
-                        </ul>
+                                <div class="col-11 content-time-image">
+                                    <a style="font-size: 20px;" href="{% url 'send_message' item.user.id %}" class="text-decoration-none">
+                                        {% if item.user.first_name and item.user.last_name or item.user.first_name %}
+                                        {{ item.user.first_name|slice:":10" }} {{ item.user.last_name|slice:":1"}}
+                                        {% else %}
+                                        {{ item.user.username|slice:":10" }}
+                                        {% endif %}
+                                    </a>
+                                    {% if item.latest_message %}
+                                    {% if item.latest_message.sender == request.user %}
+                                    <p style="font-size: 12px; display:inline;" class="text-end text-muted ms-2">{{ item.latest_message.timestamp }}</p>
+                                    <div class="mt-1 message-content">
+                                        <p style="font-size: 15px;" class="mb-0 text-muted"><strong>You: </strong>{{ item.latest_message.content|slice:":40" }}..</p>
+                                    </div>
+                                    {% else %}
+                                    <p style="font-size: 12px; display:inline;" class="text-end text-muted ms-2">{{ item.latest_message.timestamp }}</p>
+                                    <div class="mt-1">
+                                        <p style="font-size: 15px;" class="mb-0 text-muted">{{ item.latest_message.content|slice:":40" }}..</p>
+                                    </div>
+                                    {% endif %}
+                                    {% else %}
+                                    <div>
+                                        <p class="text-muted">No messages</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

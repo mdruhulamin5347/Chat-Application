@@ -1,25 +1,50 @@
 {% extends 'base.html' %}
 {% block title %} Profile View  {% endblock %}
+{% block head %}
+<Style>
+  @media screen and (min-width: 768px) {
+    .media-screen-responsive {
+      height: 230px;
+    }
+}
+</Style>
+{% endblock head%}
 {% block body %}
 
 <div class="container mt-5 mb-5">
   <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-6">
+    <div class="col-lg-8 col-md-10">
       <div class="card">
         <div class="card-body">
 <div class="container">
   <div class="row">
     <h5 class="card-title text-center">Profile View</h5><br><br>
-    <div class="col">
-      <h1 class="pb-4" ><img style="border:2px solid aqua" class="w-50 rounded rounded-circle" src="{{user.image.url}}" /></h1>
+    <div class="col-md-6">
+      <h1 class="pb-4 d-flex justify-content-center align-items-center"" ><img style="border:2px solid aqua; height:200px; width:200px;" class="rounded rounded-circle" src="{{user.image.url}}" /></h1>
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-primary">
+            <a style="color: white; text-decoration: none;" href="{% url 'update_image' %}">Update Image</a>
+        </button>
     </div>
-    <div class="col">
-      <div class="pt-5">
+    </div>
+    <div class="col-md-6">
+      <div class="pt-5 media-screen-responsive" >
         {% if user %}
-                Name: {{ user.user.username }} <br>
-            {% if user.address %}
-                <!-- <h1>{{ user.Profile_update.image }}gdhh</h1> -->
-                Address: {{ user.address }} <br>
+                Username: {{ user.user.username }} <br>
+            {% if user.user.first_name or user.user.last_name or user.address or user.user.email %}
+                
+                {% if user.user.first_name %}
+                  First Name: {{user.user.first_name}} <br>
+                {% endif %}
+                {% if user.user.last_name %}
+                  Last Name: {{user.user.last_name}} <br>
+                {% endif %}
+                {% if user.address %}
+                  Address: {{user.address}} <br>
+                {% endif %}
+                {% if user.user.email %}
+                  Email : {{user.user.email}} <br>
+                {% endif %}
             {% else %}
                 No profile update found.
               {% endif %}
@@ -27,8 +52,12 @@
               No user found.
         {% endif %}
                     <br>
-                <button class="btn btn-primary"><a style="color: white; text-decoration:none;" href="{% url 'profile_update' %}">Update Profile</a></button>
-            </div>
+      </div>
+      <div class="fixed-bottom-container">
+        <button class="btn btn-primary">
+            <a style="color: white; text-decoration:none;" href="{% url 'profile_update' %}">Update Data</a>
+        </button>
+    </div> 
 
     </div>
 

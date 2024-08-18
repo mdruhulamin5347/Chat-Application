@@ -1,7 +1,12 @@
 from django import forms
 from .models import Contact_model
 
-class contact_form(forms.ModelForm):
+class ContactForm(forms.ModelForm):
     class Meta:
-        model=Contact_model
-        exclude=('user',)
+        model = Contact_model
+        fields = ['name', 'gmail', 'phone', 'text']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].required = True
+        self.fields['gmail'].required = True

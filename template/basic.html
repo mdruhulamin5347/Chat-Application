@@ -79,6 +79,7 @@
     }
     .card{
         border:1px solid #ff02c0;
+        border-radius: 0%;
         margin: 15px 0px;
         transition: 0.4s;
       
@@ -134,16 +135,16 @@
                       </li>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Terget
+                          Tasks
                         </a>
                         <ul class="dropdown-menu">
                           {% if user.is_authenticated %}
-                            <li><a class="dropdown-item" href="{% url 'work_input' user.username %}">Task Add</a></li>
-                            <li><a class="dropdown-item" href="{% url 'task_view' user.username %}">Task View</a></li>
+                            <li><a class="dropdown-item" href="{% url 'work_input' user.username %}">Add Task</a></li>
+                            <li><a class="dropdown-item" href="{% url 'task_view' user.username %}">View Task</a></li>
                     
                           {% else %}
-                            <li><a class="dropdown-item" href="{% url 'login' %}">Task Add</a></li>
-                            <li><a class="dropdown-item" href="{% url 'login' %}">Task View</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Add Task</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">View Task</a></li>
                     
                           {% endif %}
                           
@@ -154,8 +155,12 @@
                         </ul>
                       </li>
                       {% if user.is_authenticated %}
+
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'user_chat_list' %}">Chats</a>
+                      </li>
+                      <li class="nav-item"></li>
+                      <a class="nav-link" href="{% url 'notification_list' %}">Notifications ({{ unread_notifications_count }})</a>
                       </li>
                       <li class="nav-item">
                         {% notifications_unread as unread_count %}

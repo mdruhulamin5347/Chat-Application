@@ -1,21 +1,32 @@
-from django.shortcuts import render,redirect
-from .forms import contact_form
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.contrib import messages
-# Create your views here.
-
+from .forms import ContactForm
+from .models import AboutModel
 
 def CONTACT(request):
     if request.method == 'POST':
-        form = contact_form(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
-            contact = form.save(commit=False)
-            contact.user = request.user
-            contact.save()
-            messages.success(request,'successfully submited your data!')
+            form.save()
+            subject = "Jackfruit Project Contact Form Submission"
+            message = (
+                f"Message from {form.cleaned_data['name']}\n"
+                f"Phone: {form.cleaned_data['phone']}\n"
+                f"Email: {form.cleaned_data['gmail']}\n\n"
+                f"{form.cleaned_data['text']}"
+            )
+            from_email = 'myprojects.helpservice@gmail.com'
+            recipient_list = ['myprojects.helpservice@gmail.com']
+            send_mail(subject, message, from_email, recipient_list)
+
+            messages.success(request, 'Successfully submitted your data!')
             return redirect('contact')
     else:
-        form=contact_form()
-    return render(request,'contact.html',{'form':form})
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
+
 
 def ABOUT(request):
-    return render(request,'about.html')
+    obj = AboutModel.objects.all()
+    return render(request,'about.html',{'obj':obj})

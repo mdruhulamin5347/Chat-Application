@@ -14,7 +14,9 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE = os.path.join(BASE_DIR,'template')
+TEMPLATE_DIR = os.path.join(BASE_DIR,'template')
+STATIC_DIR = os.path.join(BASE_DIR,'static')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 
@@ -51,6 +53,8 @@ INSTALLED_APPS = [
 
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,7 +69,7 @@ ROOT_URLCONF = 'exam_2nd.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Profile.context_processors.unread_notifications',
             ],
         },
     },
@@ -112,6 +117,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 8000)],
+        },
+    },
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -128,11 +142,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATICFILES_DIRS=(STATIC_DIR,)
 MEDIA_URL = 'media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'myprojects.helpservice@gmail.com' 
+EMAIL_HOST_PASSWORD = 'luojjqrczfezrgcq' 
+DEFAULT_FROM_EMAIL = 'myprojects.helpservice@gmail.com'
+
