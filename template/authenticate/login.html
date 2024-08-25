@@ -1,81 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Montserrat:ital,wght@1,100&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="icon" href="../media/icon/favicon.ico" type="image/x-icon">
-<style>
-    .card {
-        background-color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-        border: 1px solid #dddfe2;
-      }
-    ._xkv{
-        padding: 12px 0 18px;
-        text-align: center;
-    }
-    ._xkv ._97w4{
-        text-decoration: none;
-        font-size: 16px;
-        
-    }
-    ._xkv ._97w4:hover{
-        text-decoration: underline;
-        
-    }
-  </style>
-  <title>login</title>
 
+<head>
+    <title>Login Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+        .card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+            border: 1px solid #dddfe2;
+        }
+
+        ._xkv {
+            padding: 12px 0 18px;
+            text-align: center;
+        }
+
+        ._xkv ._97w4 {
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        ._xkv ._97w4:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-  
-  </header>
-  <main>   
-        <div class="header"><h4 style="text-align: center; margin-top:60px; font-size:40px; color:#0B5ED7;font-weight: bold;">Team Jackfruit</h4></div>
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title text-center">Login</h5>
-                  
-                <form method="POST" action="">
-                        {% csrf_token %}
-                        {% load crispy_forms_tags %}
-                        {{form | crispy }}
-                    
-                    <div class="d-grid">
-                      <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="_xkv fsm fwn fcg" id="login_link"><a href="/reset_password/" class="_97w4" target="">Forgotten account?</a><span role="presentation" aria-hidden="true"> · </span><a href="/auth/signUp/" rel="nofollow" class="_97w4">Sign up for Project</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        </div>
+    <header>
+        <!-- place navbar here -->
+    </header>
 
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <main>
+        <div class="header text-black">
+            <h4 style="text-align: center; margin-top: 40px; font-size: 40px; font-weight: bold;">Team Jackfruit</h4>
+        </div>
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Login</h5>
+                            {% for message in messages %}
+                              <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                              {{message}}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                            {% endfor %}
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                {% load crispy_forms_tags %}
+                                {{ form | crispy }}
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-secondary">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="_xkv fsm fwn fcg text-black" id="login_link">
+                            <a href="#" class="_97w4 text-black" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot your account?</a>
+                            <span role="presentation" aria-hidden="true"> · </span>
+                            <a href="{% url 'signUp' %}" rel="nofollow" class="_97w4 text-black">Sign up for Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- place footer here -->
+    </footer>
+
+    <!-- Password Reset Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-black text-center">Enter your email address below, and we'll send you a temporary password.</p>
+                    <form id="forgotPasswordForm" method="POST" action="{% url 'password_reset' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="emailSimple">Email Address</label>
+                            <input type="email" class="form-control" id="emailSimple" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <button id="RecoverPassword" type="submit" class="btn btn-secondary mt-3">Reset Password</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <p class="text-center text-muted">
+                    <a class="text-black" href="{% url 'login' %}">Remembered your password?</a>
+                  </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-
-
